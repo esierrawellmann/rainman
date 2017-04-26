@@ -105,7 +105,10 @@
             </div>
             <!-- /.row -->
             <div class="row">
-                <div class="col-lg-6"></div>
+                 <div class="col-lg-6">
+                    <div></div>
+                    <div id="blocklyDiv" style="height: 480px; width: 541px;"></div>
+                </div>
                 <div class="col-lg-6">
                     <div class="panel panel-default">
                         <div class="panel-heading">Codigo de 3 direcciones
@@ -138,14 +141,27 @@
 
     <!-- Metis Menu Plugin JavaScript -->
     <script src="../vendor/metisMenu/metisMenu.min.js"></script>
-
-    <!-- Morris Charts JavaScript -->
-    <script src="../vendor/raphael/raphael.min.js"></script>
-    <script src="../vendor/morrisjs/morris.min.js"></script>
-    <script src="../data/morris-data.js"></script>
-
     <!-- Custom Theme JavaScript -->
     <script src="../dist/js/sb-admin-2.js"></script>
+
+        <script src="../vendor/google-blockly/blockly_compressed.js"></script>
+    <script src="../vendor/google-blockly/blocks_compressed.js"></script>
+    <script src="../vendor/google-blockly/msg/js/en.js"></script>
+    <script>
+        var toolbox = '<xml id="toolbox" style="display: none"><category name="Logic"><category name="If"><block type="controls_if"></block><block type="controls_if"><mutation else="1"></mutation></block><block type="controls_if"><mutation elseif="1" else="1"></mutation></block></category><category name="Boolean"><block type="logic_compare"></block><block type="logic_operation"></block><block type="logic_negate"></block><block type="logic_boolean"></block><block type="logic_null"></block><block type="logic_ternary"></block></category></category><category name="Loops"><block type="controls_repeat_ext"><value name="TIMES"><block type="math_number"><field name="NUM">10</field></block></value></block><block type="controls_whileUntil"></block><block type="controls_for"><field name="VAR">i</field><value name="FROM"><block type="math_number"><field name="NUM">1</field></block></value><value name="TO"><block type="math_number"><field name="NUM">10</field></block></value><value name="BY"><block type="math_number"><field name="NUM">1</field></block></value></block><block type="controls_forEach"></block><block type="controls_flow_statements"></block></category><category name="Math"><block type="math_number"></block><block type="math_arithmetic"></block><block type="math_single"></block><block type="math_trig"></block><block type="math_constant"></block><block type="math_number_property"></block><block type="math_round"></block><block type="math_on_list"></block><block type="math_modulo"></block><block type="math_constrain"><value name="LOW"><block type="math_number"><field name="NUM">1</field></block></value><value name="HIGH"><block type="math_number"><field name="NUM">100</field></block></value></block><block type="math_random_int"><value name="FROM"><block type="math_number"><field name="NUM">1</field></block></value><value name="TO"><block type="math_number"><field name="NUM">100</field></block></value></block><block type="math_random_float"></block></category><category name="Lists"><block type="lists_create_empty"></block><block type="lists_create_with"></block><block type="lists_repeat"><value name="NUM"><block type="math_number"><field name="NUM">5</field></block></value></block><block type="lists_length"></block><block type="lists_isEmpty"></block><block type="lists_indexOf"></block><block type="lists_getIndex"></block><block type="lists_setIndex"></block></category><category name="Variables" custom="VARIABLE"></category><category name="Functions" custom="PROCEDURE"></category><sep></sep></xml>';
+        var workspace = Blockly.inject('blocklyDiv',{toolbox: toolbox});
+
+        function onFirstComment(event) {
+              if (event.type == Blockly.Events.CREATE){
+                console.log(event);
+                console.log(event.xml.attributes.type.value);
+                alert(event.xml.attributes.type.value);
+            }
+        }
+        workspace.addChangeListener(onFirstComment);
+
+
+    </script>
 
 </body>
 
