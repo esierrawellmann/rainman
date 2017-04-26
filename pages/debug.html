@@ -35,9 +35,9 @@
 
 </head>
 
-<body>
+<body ng-app="myApp">
 
-    <div id="wrapper">
+    <div id="wrapper" ng-controller="myController">
 
         <!-- Navigation -->
         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
@@ -139,15 +139,18 @@
                 <div class="col-lg-8">
                     <div class="row">
                         <div class="col-lg-4">
-                            Stack</hr>
+                            Stack 
+                            <button ng-click='addStack({"id":123 ,"valor":"olis","class":"success"})'>Add Stack</button>
+                            <button ng-click='deleteStack(1)'>Delete Stack</button>
+                        </hr>
                             <table class="table table-bordered">
                                 <tr>
                                     <th>Numero</th>
                                     <th>Valor</th>
                                 </tr>
-                                <tr>
-                                  <td class="active">...</td>
-                                  <td class="success">...</td>
+                                <tr ng-repeat="stack in stacks">
+                                  <td  ng-class="stack.class">{{stack.id}}</td>
+                                  <td  ng-class="stack.class">{{stack.valor}}</td>
                                 </tr>
                             </table>
                         </div>
@@ -158,9 +161,9 @@
                                     <th>Numero</th>
                                     <th>Valor</th>
                                 </tr>
-                                <tr>
-                                  <td class="warning">...</td>
-                                  <td class="danger">...</td>
+                                 <tr ng-repeat="heap in heaps">
+                                  <td  ng-class="heap.class">{{heap.id}}</td>
+                                  <td  ng-class="heap.class">{{heap.valor}}</td>
                                 </tr>
                             </table>
                         </div>
@@ -171,9 +174,9 @@
                                     <th>Numero</th>
                                     <th>Valor</th>
                                 </tr>
-                                <tr>
-                                  <td>...</td>
-                                  <td class="info">...</td>
+                                <tr ng-repeat="string in strings">
+                                  <td  ng-class="string.class">{{string.id}}</td>
+                                  <td  ng-class="string.class">{{string.valor}}</td>
                                 </tr>
                             </table>
                         </div>
@@ -196,13 +199,33 @@
     <!-- Metis Menu Plugin JavaScript -->
     <script src="../vendor/metisMenu/metisMenu.min.js"></script>
 
-    <!-- Morris Charts JavaScript -->
-    <script src="../vendor/raphael/raphael.min.js"></script>
-    <script src="../vendor/morrisjs/morris.min.js"></script>
-    <script src="../data/morris-data.js"></script>
 
     <!-- Custom Theme JavaScript -->
     <script src="../dist/js/sb-admin-2.js"></script>
+
+    <script src="../vendor/angular/angular.min.js"></script>
+    <script type="text/javascript">
+
+    var myApp = angular.module('myApp',[]);
+
+    myApp.controller('myController', ['$scope', function($scope) {
+
+
+
+        $scope.stacks = [{"id":1,"valor":"olis","class":"success"},{"id":2,"valor":"olis","class":"info"}];
+        $scope.heaps = [{"id":1,"valor":"olis","class":"active"},{"id":2,"valor":"olis","class":"danger"}];
+        $scope.strings = [{"id":1,"valor":"olis","class":"warning"}];
+
+
+        $scope.addStack = function(stack){
+            $scope.stacks.push(stack);
+        }
+
+        $scope.deleteStack = function(stackIndex){
+            $scope.stacks.splice(stackIndex,1);
+        }
+    }]);
+    </script>
 
 </body>
 
